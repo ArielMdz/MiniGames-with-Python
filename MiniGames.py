@@ -2,7 +2,8 @@
 de los distintos juegos mediante botones, cada boton se encargara de llamar a los distintos juegos por medio de modulos
 indepedientes teniendo cada programa su propio codigo aislado'''
 from tkinter import *           #Se importo toda la libreria  de Tkinter
-import Games 
+from Games import Snake
+from Games import Tic_Tac_Toe
 
 def mainWindow():
     global windowMain
@@ -20,10 +21,10 @@ def mainWindow():
     windowMain.mainloop()
 
 def game1():
-    pass
+    Snake.start_game()
 
 def game2():
-    pass
+    Tic_Tac_Toe.start_game()
 
 if __name__ == '__main__':
     mainWindow()

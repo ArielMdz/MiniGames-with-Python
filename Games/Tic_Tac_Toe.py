@@ -1,9 +1,9 @@
-'''Este programa consistira en realizar el clascio juego de Snake'''
+'''Este programa consistira en realizar el clascio juego de Tic-Tac-Toe'''
 import pygame
 
 def start_game():
     pygame.init()
-    pygame.display.set_caption('Snake Game')
+    pygame.display.set_caption('Tic-Tac-Toe')
 
     screen = pygame.display.set_mode([500, 500])
 
