@@ -14,14 +14,20 @@ def mainWindow():
 
     Label(windowMain, text="Welcome to MiniGames!", fg = "white", bg= "black", justify = "center", font=("Arial", 16)).pack(anchor = CENTER)
 
-    Button(windowMain, text = "Game 1", bg = "green", fg = "white", width = 30, height = 5, command = game1).pack(side = LEFT)
+    #snake_photo = PhotoImage(file = r"Images/Snake.png")
+    Button(windowMain, text = "Snake Game", bg = "green", fg = "white", width = 30, height = 5, command = game1).pack(side = LEFT)
 
     Button(windowMain, text = "Game 2", bg = "green", fg = "white", width = 30, height = 5, command = game2).pack(side = RIGHT)
     
     windowMain.mainloop()
 
 def game1():
-    Snake.start_game()
+    while True:
+        windowMain.withdraw()
+        if Snake.start_game():
+            break
+    windowMain.iconify()
+    windowMain.deiconify()
 
 def game2():
     Tic_Tac_Toe.start_game()
