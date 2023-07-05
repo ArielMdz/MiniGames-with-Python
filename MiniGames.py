@@ -9,7 +9,7 @@ from Games import Tic_Tac_Toe
 def mainWindow():
     global windowMain
     windowMain = Tk()
-    windowMain.geometry("500x250")
+    windowMain.geometry("550x350")
     windowMain.configure(background = "black")
     windowMain.title("Mini Games")
 
@@ -17,15 +17,19 @@ def mainWindow():
     icono = PhotoImage(file = "Icon.png")
     windowMain.iconphoto(True, icono)
     
-    Label(windowMain, text="Welcome to MiniGames!", fg = "white", bg= "black", justify = "center", font=("Arial", 16)).pack(anchor = CENTER)
+    Label(windowMain, text = "Welcome to MiniGames!", fg = "white", bg= "black", justify = "center", font=("Arial", 16)).pack(anchor = CENTER)
 
     snake_photo = PhotoImage(file = 'Snake.png')
     snake_image = snake_photo.subsample(30, 30)
-    Button(windowMain, text = "Snake Game", font = ("segoe print", 14), image = snake_image, compound = LEFT, bg = "green", fg = "white", width = 250, height = 100, command = game1).pack(side = LEFT)
+    Button(windowMain, text = "Snake Game", font = ("segoe print", 14), image = snake_image, compound = LEFT, bg = "green", fg = "white", width = 250, height = 100, command = game1).pack(fill = BOTH)
 
     pong_photo = PhotoImage(file = 'Pong.png')
     pong_image = pong_photo.subsample(3, 3)
-    Button(windowMain, text = "Ping Pong", font = ("segoe print", 14), image = pong_image, compound = LEFT, bg = "green", fg = "white", width = 250, height = 100, command = game2).pack(side = RIGHT)
+    Button(windowMain, text = "Ping Pong", font = ("segoe print", 14), image = pong_image, compound = LEFT, bg = "green", fg = "white", width = 250, height = 100, command = game2).pack(fill = BOTH)
+    
+    TTT_photo = PhotoImage(file = 'TTT.png')
+    TTT_image = TTT_photo.subsample(3, 3)
+    Button(windowMain, text = "Tic-Tac-Toe", font = ("segoe print", 14), image = TTT_image, compound = LEFT, bg = "green", fg = "white", width = 250, height = 100, command = game3).pack(fill = BOTH)
     
     windowMain.mainloop()
 
@@ -41,6 +45,14 @@ def game2():
     while True:
         windowMain.withdraw()
         if PingPong.main():
+            break
+    windowMain.iconify()
+    windowMain.deiconify()
+
+def game3():
+    while True:
+        windowMain.withdraw()
+        if Tic_Tac_Toe.start_game():
             break
     windowMain.iconify()
     windowMain.deiconify()
