@@ -3,6 +3,7 @@ de los distintos juegos mediante botones, cada boton se encargara de llamar a lo
 indepedientes teniendo cada programa su propio codigo aislado'''
 from tkinter import *           #Se importo toda la libreria  de Tkinter
 from Games import Snake
+from Games import PingPong
 from Games import Tic_Tac_Toe
 
 def mainWindow():
@@ -12,12 +13,19 @@ def mainWindow():
     windowMain.configure(background = "black")
     windowMain.title("Mini Games")
 
+    # Establecer ícono de la ventana
+    icono = PhotoImage(file = "Icon.png")
+    windowMain.iconphoto(True, icono)
+    
     Label(windowMain, text="Welcome to MiniGames!", fg = "white", bg= "black", justify = "center", font=("Arial", 16)).pack(anchor = CENTER)
 
-    #snake_photo = PhotoImage(file = r"Images/Snake.png")
-    Button(windowMain, text = "Snake Game", bg = "green", fg = "white", width = 30, height = 5, command = game1).pack(side = LEFT)
+    snake_photo = PhotoImage(file = 'Snake.png')
+    snake_image = snake_photo.subsample(30, 30)
+    Button(windowMain, text = "Snake Game", font = ("segoe print", 14), image = snake_image, compound = LEFT, bg = "green", fg = "white", width = 250, height = 100, command = game1).pack(side = LEFT)
 
-    Button(windowMain, text = "Game 2", bg = "green", fg = "white", width = 30, height = 5, command = game2).pack(side = RIGHT)
+    pong_photo = PhotoImage(file = 'Pong.png')
+    pong_image = pong_photo.subsample(3, 3)
+    Button(windowMain, text = "Ping Pong", font = ("segoe print", 14), image = pong_image, compound = LEFT, bg = "green", fg = "white", width = 250, height = 100, command = game2).pack(side = RIGHT)
     
     windowMain.mainloop()
 
@@ -30,7 +38,12 @@ def game1():
     windowMain.deiconify()
 
 def game2():
-    Tic_Tac_Toe.start_game()
+    while True:
+        windowMain.withdraw()
+        if PingPong.main():
+            break
+    windowMain.iconify()
+    windowMain.deiconify()
 
 if __name__ == '__main__':
     mainWindow()
