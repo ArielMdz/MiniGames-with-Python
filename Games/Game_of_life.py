@@ -1,4 +1,7 @@
+import pygame_widgets
 import pygame
+from pygame_widgets.slider import Slider
+from pygame_widgets.textbox import TextBox
 import copy
 
 #Colors
@@ -7,10 +10,13 @@ BLACK = (0, 0, 0)
 GRAY = (150, 150, 150)
 GREEN = (0, 255, 0)
 YELLOW = (255, 255, 0)
+BLUE = (0, 0, 200)
 
+#Tama;o de la ventana [0] y de cantidad de celular [1]
 SIZE_X = (1001, 101)
 SIZE_Y = (601, 51)
 
+#Esta funcion inicializa todas las variables con sus valores iniciales 
 def init_game():
     global cells, cells_before, cells_neighboring, pos_game
     cells = [[0 for i in range(0, SIZE_Y[1])] for j in range(0, SIZE_X[1])] 
@@ -18,6 +24,7 @@ def init_game():
     cells_neighboring = [[0 for i in range(0, SIZE_Y[1])] for j in range(0, SIZE_X[1])]
     pos_game = [SIZE_X[1]-1, SIZE_Y[1]-1]
 
+#Esta funcion transforma las coordenadas del mouse a coordenadas de  
 def cursor_mouse(x, y):
     if y > 100 and y < SIZE_Y[0]-1 and x > 0 and x < SIZE_X[0]-1:
         return [(int(x/10)), (int((y - 100)/10))]
@@ -37,6 +44,8 @@ def start_game():
 
     screen = pygame.display.set_mode([SIZE_X[0], SIZE_Y[0]])    #Se define tamaño de ventana
     clock = pygame.time.Clock()                     #Se declara un reloj para los fps
+    
+    slider = Slider(screen, 30, 70, 180, 14, min=1, max=60, step=1, colour = WHITE, handleColour = BLUE)
 
     font = pygame.font.SysFont("segoe print", 40)
     text = font.render("Game of Life", True, WHITE)
@@ -49,7 +58,8 @@ def start_game():
     play = False
     while game:
         #Eventos que se encargan de cerrar el juego
-        for event in pygame.event.get():
+        events = pygame.event.get()
+        for event in events:
             if event.type == pygame.QUIT:
                 game = False
             #Evento de poscion de mouse
@@ -74,9 +84,11 @@ def start_game():
         #Color de fondo, titulod y textos de juego
         screen.fill(BLACK)
         text_title = text.get_rect(center = (int(SIZE_X[0]/2), 50))
+        text_speed = font2.render("Speed: " + str(slider.getValue()), True, WHITE)
         screen.blit(text, text_title).center
         screen.blit(text_P, (750, 25))
         screen.blit(text_R, (750, 50))
+        screen.blit(text_speed, (30, 30))
 
         #Condicion de juego play o pausa
         if play:
@@ -112,8 +124,9 @@ def start_game():
                     pygame.draw.rect(screen, YELLOW, (column, row, 9, 9))
                     cells[x][y] = 0
 
+        pygame_widgets.update(events)
         pygame.display.flip()
-        clock.tick(5)
+        clock.tick(slider.getValue())
 
     pygame.quit()
     return True

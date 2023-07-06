@@ -1,4 +1,4 @@
-'''! Este programa consiste en una interfaz grafica principal de mini juegos, se encargara de dar acceso a cada uno
+'''Este programa consiste en una interfaz grafica principal de mini juegos, se encargara de dar acceso a cada uno
 de los distintos juegos mediante botones, cada boton se encargara de llamar a los distintos juegos por medio de modulos
 indepedientes teniendo cada programa su propio codigo aislado'''
 from tkinter import *           #Se importo toda la libreria  de Tkinter
