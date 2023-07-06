@@ -34,7 +34,7 @@ def start_game():
     pygame.init()                               #Se crea la ventana 
     pygame.display.set_caption('Snake Game')    #Se asigna un titulo
 
-    gameIcon = pygame.image.load('Snake.png')
+    gameIcon = pygame.image.load('.\Images\Snake.png')
     pygame.display.set_icon(gameIcon)
 
     screen = pygame.display.set_mode([700, 600])    #Se define tamaño de ventana

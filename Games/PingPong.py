@@ -70,7 +70,7 @@ class PongBall: #Defines the class for the ball
 
 class PongRacket: #Defines the class for the rackets
     def __init__(self):
-        imageR = pygame.image.load("racket.png").convert_alpha()
+        imageR = pygame.image.load('.\Images\\racket.png')
         self.image = pygame.transform.scale(imageR, (RACKET_W, RACKET_H))
         #Class atributes
         
@@ -175,10 +175,10 @@ def main(): #Defines the main function
     pygame.display.set_caption("Pong") #Gives a name for the window
     letters = pygame.font.Font(None, 60)
 
-    gameIcon = pygame.image.load('Pong.png')
+    gameIcon = pygame.image.load('.\Images\Pong.png')
     pygame.display.set_icon(gameIcon)
 
-    ball = PongBall("green_ball.png") #Creates a variable of type PongBall
+    ball = PongBall('.\Images\green_ball.png') #Creates a variable of type PongBall
     
     racket1 = PongRacket() #Creates the left racket
     racket1.x = 60

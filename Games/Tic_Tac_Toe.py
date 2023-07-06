@@ -50,7 +50,7 @@ def start_game():
     pygame.init()
     pygame.display.set_caption('Tic-Tac-Toe')
     screen = pygame.display.set_mode([500, 500])
-    gameIcon = pygame.image.load('TTT.png')
+    gameIcon = pygame.image.load('.\Images\TTT.png')
     pygame.display.set_icon(gameIcon)
 
     #Se establecen distintas fuentes y textos
