@@ -1,7 +1,6 @@
 import pygame_widgets
 import pygame
 from pygame_widgets.slider import Slider
-from pygame_widgets.textbox import TextBox
 import copy
 
 #Colors
@@ -18,11 +17,12 @@ SIZE_Y = (601, 51)
 
 #Esta funcion inicializa todas las variables con sus valores iniciales 
 def init_game():
-    global cells, cells_before, cells_neighboring, pos_game
+    global cells, cells_before, cells_neighboring, pos_game, cycles
     cells = [[0 for i in range(0, SIZE_Y[1])] for j in range(0, SIZE_X[1])] 
     cells_before = [[0 for i in range(0, SIZE_Y[1])] for j in range(0, SIZE_X[1])] 
     cells_neighboring = [[0 for i in range(0, SIZE_Y[1])] for j in range(0, SIZE_X[1])]
     pos_game = [SIZE_X[1]-1, SIZE_Y[1]-1]
+    cycles = 0
 
 #Esta funcion transforma las coordenadas del mouse a coordenadas de  
 def cursor_mouse(x, y):
@@ -31,10 +31,12 @@ def cursor_mouse(x, y):
     else: 
         return [SIZE_X[1]-1, SIZE_Y[1]-1]
     
+#def slider():
+#    pygame.draw.rect(surface)
 
 def start_game():
     #Declaracion de varaibles 
-    global cells, cells_before, cells_neighboring, pos_game
+    global cells, cells_before, cells_neighboring, pos_game, cycles
     init_game()
 
     pygame.init()                               #Se crea la ventana 
@@ -45,7 +47,8 @@ def start_game():
     screen = pygame.display.set_mode([SIZE_X[0], SIZE_Y[0]])    #Se define tamaño de ventana
     clock = pygame.time.Clock()                     #Se declara un reloj para los fps
     
-    slider = Slider(screen, 30, 70, 180, 14, min=1, max=60, step=1, colour = WHITE, handleColour = BLUE)
+    #slider()
+    #slider = Slider(screen, 30, 70, 180, 14, min=1, max=100, step=1, colour = WHITE, handleColour = BLUE)
 
     font = pygame.font.SysFont("segoe print", 40)
     text = font.render("Game of Life", True, WHITE)
@@ -58,8 +61,7 @@ def start_game():
     play = False
     while game:
         #Eventos que se encargan de cerrar el juego
-        events = pygame.event.get()
-        for event in events:
+        for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game = False
             #Evento de poscion de mouse
@@ -84,13 +86,14 @@ def start_game():
         #Color de fondo, titulod y textos de juego
         screen.fill(BLACK)
         text_title = text.get_rect(center = (int(SIZE_X[0]/2), 50))
-        text_speed = font2.render("Speed: " + str(slider.getValue()), True, WHITE)
+        #text_speed = font2.render("Speed: " + str(slider.getValue()), True, WHITE)
         screen.blit(text, text_title).center
         screen.blit(text_P, (750, 25))
         screen.blit(text_R, (750, 50))
-        screen.blit(text_speed, (30, 30))
+        #screen.blit(text_speed, (30, 30))
 
         #Condicion de juego play o pausa
+        #if play and 101 - slider.getValue() < cycles:
         if play:
             #Incializacion de variables para conteo de vecinos y copia de matriz de celulas anterior 
             cells_before = copy.deepcopy(cells)
@@ -106,7 +109,10 @@ def start_game():
                         cells[i][j] = 1
                     else:
                         cells[i][j] = 0
-                
+            cycles = 0
+        elif play:
+            cycles += 1
+
         #altera el valor de la celula sobre la que se encuentra el mouse
         if cells[pos_game[0]][pos_game[1]] == 0 and not pos_game == [SIZE_X[1]-1, SIZE_Y[1]-1]:
             cells[pos_game[0]][pos_game[1]] = 2
@@ -124,13 +130,11 @@ def start_game():
                     pygame.draw.rect(screen, YELLOW, (column, row, 9, 9))
                     cells[x][y] = 0
 
-        pygame_widgets.update(events)
+        #pygame_widgets.update(event)
         pygame.display.flip()
-        clock.tick(slider.getValue())
-
+        clock.tick(120)
     pygame.quit()
     return True
 
 #if __name__ == '__main__':
-#    start_game()
-    
+#    start_game()  
