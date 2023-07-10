@@ -2,12 +2,12 @@
 de los distintos juegos mediante botones, cada boton se encargara de llamar a los distintos juegos por medio de modulos
 indepedientes teniendo cada programa su propio codigo aislado'''
 from tkinter import *           #Se importo toda la libreria  de Tkinter
-from Games import Snake, PingPong, Tic_Tac_Toe, Game_of_life
+from Games import Snake, PingPong, Tic_Tac_Toe, Game_of_life, FlappyBird
 
 def mainWindow():
     global windowMain
     windowMain = Tk()
-    windowMain.geometry("550x460")
+    windowMain.geometry("550x570")
     windowMain.configure(background = "black")
     windowMain.title("Mini Games")
 
@@ -32,6 +32,10 @@ def mainWindow():
     life_photo = PhotoImage(file = '.\Images\Life.png')
     life_image = life_photo.subsample(6, 6)
     Button(windowMain, text = "Game of Life", font = ("segoe print", 14), image = life_image, compound = LEFT, bg = "green", fg = "white", width = 250, height = 100, command = game4).pack(fill = BOTH)
+    
+    flappy_photo = PhotoImage(file = '.\Images\\flappy_bird.png')
+    flappy_image = flappy_photo.subsample(6, 6)
+    Button(windowMain, text = "Flappt Bird", font = ("segoe print", 14), image = flappy_image, compound = LEFT, bg = "green", fg = "white", width = 250, height = 100, command = game5).pack(fill = BOTH)
     
     windowMain.mainloop()
 
@@ -67,5 +71,12 @@ def game4():
     windowMain.iconify()
     windowMain.deiconify()
 
+def game5():
+    while True:
+        windowMain.withdraw()
+        if FlappyBird.main():
+            break
+    windowMain.iconify()
+    windowMain.deiconify()
 if __name__ == '__main__':
     mainWindow()

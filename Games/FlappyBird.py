@@ -66,8 +66,8 @@ class Flappy: #Defines the Flappy class
     def move(self): #Function that moves the bird up or down
         self.y += self.dir_y
         
-        print("Flappy X: ", self.x)
-        print("Flappy Y: ", self.y)
+        #print("Flappy X: ", self.x)
+        #print("Flappy Y: ", self.y)
         
     def out(self):
         if ((self.y >= WINDOW_H)
@@ -95,6 +95,9 @@ def main(): #MAIN FUNCTION
     pygame.display.set_caption("Flappy Bird")
     letters = pygame.font.Font(None, 50)
     
+    gameIcon = pygame.image.load('.\Images\\flappy_bird.png')
+    pygame.display.set_icon(gameIcon)
+
     flappy = Flappy(".\images\\flappy_bird.png")
     
     speed = 5
@@ -162,6 +165,7 @@ def main(): #MAIN FUNCTION
         pygame.time.Clock().tick(FPS)
         
     pygame.quit()
+    return True
         
-if __name__ == "__main__": #Executes the main function
-    main()
+#if __name__ == "__main__": #Executes the main function
+#    main()
