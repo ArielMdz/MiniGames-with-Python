@@ -4,4 +4,3 @@ Conjunto de juegos simples basados en Python utilizando la libreria Pygames que 
 ## Modulos necesarios
 Para poder ejecutar los juegos es necesaria tener instalado Pygame y Pygame Widget, puedes instalarlo con los siguietes comandos:
 - pip install pygame
-- pip install pygame-widgets
